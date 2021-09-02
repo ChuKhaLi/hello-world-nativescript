@@ -1,0 +1,23 @@
+<ActionBar title="Current challenge" class="action-bar" flat="true">
+</ActionBar>
+<StackLayout>
+    <TextField
+        hint="enter challenge"
+        [(ngModel)]="currentChallenge"
+    ></TextField>
+    <Button text="Set challenge" (tap)="onSetChallenge()"></Button>
+    <ListView
+        height="150"
+        [items]="challenges"
+        class="list-group"
+        row="0"
+    >
+        <ng-template let-item="item" let-i="index">
+            <GridLayout>
+                <label
+                    [text]="item"
+                ></label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+</StackLayout>
