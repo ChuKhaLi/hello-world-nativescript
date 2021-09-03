@@ -7,16 +7,15 @@
     ></TextField>
     <Button text="Set challenge" (tap)="onSetChallenge()"></Button>
     <ListView
-        height="150"
+        height="300"
         [items]="challenges"
+        (itemTap)="onItemTap($event)"
         class="list-group"
         row="0"
     >
         <ng-template let-item="item" let-i="index">
             <GridLayout>
-                <label
-                    [text]="item"
-                ></label>
+                <label class="title" [text]="item"></label>
             </GridLayout>
         </ng-template>
     </ListView>

@@ -9,9 +9,6 @@
   },
   "private": true,
   "dependencies": {
-    "@nativescript/core": "~8.0.0",
-    "nativescript-theme-core": "~1.0.4",
-    "@nativescript/angular": "^12.0.0",
     "@angular/animations": "^12.0.0",
     "@angular/common": "^12.0.0",
     "@angular/compiler": "^12.0.0",
@@ -20,6 +17,9 @@
     "@angular/platform-browser": "^12.0.0",
     "@angular/platform-browser-dynamic": "^12.0.0",
     "@angular/router": "^12.0.0",
+    "@nativescript/angular": "^12.0.0",
+    "@nativescript/core": "~8.0.0",
+    "@nativescript/theme": "^3.0.1",
     "rxjs": "~6.6.0",
     "zone.js": "^0.11.1"
   },
