@@ -1,88 +1,98 @@
 {
-  "version": 2,
-  "projects": {
-    "hello-world-nativescript": {
-      "projectType": "application",
-      "root": "apps/hello-world-nativescript/",
-      "sourceRoot": "apps/hello-world-nativescript/src",
-      "prefix": "",
-      "targets": {
-        "build": {
-          "executor": "@nativescript/nx:build",
-          "options": {
-            "noHmr": true,
-            "production": true,
-            "uglify": true,
-            "release": true,
-            "forDevice": true
-          },
-          "configurations": {
-            "prod": {
-              "fileReplacements": [
-                {
-                  "replace": "./src/environments/environment.ts",
-                  "with": "./src/environments/environment.prod.ts"
+    "version": 2,
+    "projects": {
+        "hello-world-nativescript": {
+            "projectType": "application",
+            "root": "apps/hello-world-nativescript/",
+            "sourceRoot": "apps/hello-world-nativescript/src",
+            "prefix": "",
+            "targets": {
+                "build": {
+                    "executor": "@nativescript/nx:build",
+                    "options": {
+                        "noHmr": true,
+                        "production": true,
+                        "uglify": true,
+                        "release": true,
+                        "forDevice": true
+                    },
+                    "configurations": {
+                        "prod": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "./src/environments/environment.ts",
+                                    "with": "./src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "ios": {
+                    "executor": "@nativescript/nx:build",
+                    "options": {
+                        "platform": "ios"
+                    },
+                    "configurations": {
+                        "build": {
+                            "copyTo": "./dist/build.ipa"
+                        },
+                        "prod": {
+                            "combineWithConfig": "build:prod"
+                        }
+                    }
+                },
+                "android": {
+                    "executor": "@nativescript/nx:build",
+                    "options": {
+                        "platform": "android"
+                    },
+                    "configurations": {
+                        "build": {
+                            "copyTo": "./dist/build.apk"
+                        },
+                        "prod": {
+                            "combineWithConfig": "build:prod"
+                        }
+                    }
+                },
+                "clean": {
+                    "executor": "@nativescript/nx:build",
+                    "options": {
+                        "clean": true
+                    }
+                },
+                "lint": {
+                    "executor": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/hello-world-nativescript/**/*.ts",
+                            "apps/hello-world-nativescript/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "executor": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/hello-world-nativescript/jest.config.js",
+                        "tsConfig": "apps/hello-world-nativescript/tsconfig.spec.json",
+                        "passWithNoTests": true,
+                        "setupFile": "apps/hello-world-nativescript/src/test-setup.ts"
+                    }
                 }
-              ]
             }
-          }
-        },
-        "ios": {
-          "executor": "@nativescript/nx:build",
-          "options": {
-            "platform": "ios"
-          },
-          "configurations": {
-            "build": {
-              "copyTo": "./dist/build.ipa"
-            },
-            "prod": {
-              "combineWithConfig": "build:prod"
-            }
-          }
-        },
-        "android": {
-          "executor": "@nativescript/nx:build",
-          "options": {
-            "platform": "android"
-          },
-          "configurations": {
-            "build": {
-              "copyTo": "./dist/build.apk"
-            },
-            "prod": {
-              "combineWithConfig": "build:prod"
-            }
-          }
-        },
-        "clean": {
-          "executor": "@nativescript/nx:build",
-          "options": {
-            "clean": true
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/hello-world-nativescript/**/*.ts",
-              "apps/hello-world-nativescript/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/hello-world-nativescript/jest.config.js",
-            "tsConfig": "apps/hello-world-nativescript/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/hello-world-nativescript/src/test-setup.ts"
-          }
         }
-      }
+    },
+    "generators": {
+        "@nrwl/angular:library": {
+            "style": "scss",
+            "unitTestRunner": "jest"
+        },
+        "@nrwl/angular:component": {
+            "style": "scss"
+        }
+    },
+    "cli": {
+        "defaultCollection": "@nrwl/angular",
+        "packageManager": "npm"
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
 }
