@@ -1,0 +1,11 @@
+<FlexboxLayout>
+    <TextField
+        hint="enter challenge"
+        [(ngModel)]="currentChallenge"
+    ></TextField>
+    <Button
+        text="Add challenge"
+        class="-primary"
+        (tap)="onSetChallenge()"
+    ></Button>
+</FlexboxLayout>

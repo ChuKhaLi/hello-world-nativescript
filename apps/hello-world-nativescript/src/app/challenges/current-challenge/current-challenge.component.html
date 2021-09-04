@@ -1,0 +1,11 @@
+<ListView
+    [items]="challenges"
+    (itemTap)="onRemoveChallenge($event)"
+    row="1"
+    col="0"
+    colSpan="2"
+>
+    <ng-template let-item="item">
+        <label class="title" [text]="item"></label>
+    </ng-template>
+</ListView>

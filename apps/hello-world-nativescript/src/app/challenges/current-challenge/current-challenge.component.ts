@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemEventData, ObservableArray } from '@nativescript/core';
+import { ChallengeService } from '../challenge.service';
 
 @Component({
     selector: 'current-challenge',
@@ -8,24 +9,16 @@ import { ItemEventData, ObservableArray } from '@nativescript/core';
 })
 export class CurrentChallengeComponent implements OnInit {
     challenges = new ObservableArray<string>();
-    currentChallenge = '';
 
-    constructor() { }
+    constructor(
+        private readonly challengeService: ChallengeService
+    ) { }
 
     ngOnInit(): void {
+        this.challenges = this.challengeService.getChallenges();
     }
 
-    onSetChallenge() {
-        if (!this.currentChallenge || !this.currentChallenge.trim()) {
-            return;
-        }
-
-        this.challenges.push(this.currentChallenge);
-        this.currentChallenge = '';
+    onRemoveChallenge(args: ItemEventData) {
+        this.challengeService.removeChallenge(args.index);
     }
-
-    onItemTap(args: ItemEventData) {
-        this.challenges.splice(args.index, 1);
-    }
-
 }
